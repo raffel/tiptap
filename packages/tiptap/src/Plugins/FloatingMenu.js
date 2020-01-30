@@ -15,6 +15,7 @@ class Menu {
     this.editorView = editorView
     this.isActive = false
     this.top = 0
+    this.left = 0
 
     // the mousedown event is fired before blur so we can prevent it
     this.mousedownHandler = this.handleClick.bind(this)
@@ -83,9 +84,11 @@ class Menu {
     const editorBoundings = parent.getBoundingClientRect()
     const cursorBoundings = view.coordsAtPos(state.selection.anchor)
     const top = cursorBoundings.top - editorBoundings.top
+    const left = cursorBoundings.left - editorBoundings.left - 35
 
     this.isActive = true
     this.top = top
+    this.left = left
 
     this.sendUpdate()
   }
@@ -94,6 +97,7 @@ class Menu {
     this.options.onUpdate({
       isActive: this.isActive,
       top: this.top,
+      left: this.left,
     })
   }
 
